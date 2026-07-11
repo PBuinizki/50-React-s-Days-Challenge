@@ -3,11 +3,13 @@
   border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
+  /* Наследуем шрифт приложения, чтобы избежать FOUT при смене шрифтов */
   font-family: inherit;
-  transition: all 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* translateY вместо scale, чтобы не размывать текст на Retina */
 .btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
@@ -34,15 +36,15 @@
 
 .btn-primary {
   background-color: #3b82f6;
-  color: white;
+  color: #ffffff;
 }
 
 .btn-secondary {
   background-color: #6b7280;
-  color: white;
+  color: #ffffff;
 }
 
 .btn-danger {
   background-color: #ef4444;
-  color: white;
+  color: #ffffff;
 }

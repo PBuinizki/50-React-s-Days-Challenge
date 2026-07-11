@@ -1,6 +1,13 @@
 import Button from './components/Button';
 import './App.css';
 
+/**
+ * Root application component.
+ * Renders a demo showcase for the Button component,
+ * displaying all combinations of variants and sizes.
+ *
+ * @returns {JSX.Element} The rendered demo page.
+ */
 function App() {
   const variants = ['primary', 'secondary', 'danger'];
   const sizes = ['small', 'medium', 'large'];
@@ -14,13 +21,13 @@ function App() {
 
       <main className="demo-grid">
         {variants.map((variant) => (
-          <div key={variant} className="variant-group">
+          <section key={variant} className="variant-group">
             <h2 className="variant-title">{variant}</h2>
             <div className="button-row">
               {sizes.map((size) => (
-                <Button 
-                  key={size} 
-                  variant={variant} 
+                <Button
+                  key={size}
+                  variant={variant}
                   size={size}
                   onClick={() => alert(`Нажата: ${variant} ${size}`)}
                 >
@@ -28,10 +35,10 @@ function App() {
                 </Button>
               ))}
             </div>
-          </div>
+          </section>
         ))}
       </main>
-      
+
       <footer>
         <p>Сделано с ❤️ в рамках челленджа</p>
       </footer>
