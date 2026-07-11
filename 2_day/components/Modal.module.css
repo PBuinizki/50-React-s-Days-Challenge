@@ -1,80 +1,81 @@
-.backdrop {
+/* fixed, а не absolute: чтобы модалка не обрезалась overflow: hidden родителя
+   и не позиционировалась относительно позиционированного предка. */
+.overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.6);
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  /* 1000 — стандартный слой для оверлеев, ниже тостов и тултипов. */
   z-index: 1000;
-  animation: fadeIn 0.2s ease;
+  padding: 16px;
+  animation: fadeIn 0.2s ease-out;
 }
 
-.modal {
+.dialog {
   background: #ffffff;
   border-radius: 12px;
-  padding: 30px;
   max-width: 500px;
-  width: 90%;
-  position: relative;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  animation: slideIn 0.3s ease;
+  width: 100%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  animation: slideUp 0.2s ease-out;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .title {
-  margin-top: 0;
-  margin-bottom: 20px;
-  color: #1f2937;
-  font-size: 1.5rem;
+  margin: 0;
+  font-size: 1.25rem;
+  color: #111827;
 }
 
-.content {
-  color: #4b5563;
-  line-height: 1.6;
-}
-
+/* Сброс нативных стилей <button>. Размер 36x36 — минимальный тач-таргет
+   по гайдлайнам WCAG (рекомендовано от 44px, но 36 — разумный компромисс). */
 .closeButton {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  background: none;
+  background: transparent;
   border: none;
-  font-size: 24px;
+  font-size: 28px;
+  line-height: 1;
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
   cursor: pointer;
-  color: #9ca3af;
-  padding: 0;
-  width: 30px;
-  height: 30px;
+  color: #6b7280;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: background-color 0.15s ease, color 0.15s ease;
 }
 
 .closeButton:hover {
-  background-color: #e5e7eb;
-  color: #1f2937;
+  background-color: #f3f4f6;
+  color: #111827;
+}
+
+.body {
+  padding: 24px;
+  /* overflow-y: auto — скролл появляется только если контент выше max-height. */
+  overflow-y: auto;
+  color: #374151;
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-@keyframes slideIn {
-  from {
-    transform: scale(0.9) translateY(-20px);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1) translateY(0);
-    opacity: 1;
-  }
+@keyframes slideUp {
+  from { transform: translateY(10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
