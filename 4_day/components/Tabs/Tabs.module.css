@@ -1,0 +1,86 @@
+.tabs {
+  width: 100%;
+}
+
+/* flex + gap вместо margin — чтобы не было лишних отступов по краям.
+   border-bottom создаёт визуальную "линию" под вкладками. */
+.tabList {
+  display: flex;
+  gap: 4px;
+  border-bottom: 2px solid #e5e7eb;
+  margin-bottom: 24px;
+}
+
+/* Сброс нативных стилей <button>.
+   position: relative нужен для индикатора активной вкладки. */
+.tab {
+  background: transparent;
+  border: none;
+  padding: 12px 20px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #6b7280;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s ease;
+  font-family: inherit;
+}
+
+.tab:hover:not(:disabled) {
+  color: #111827;
+}
+
+/* :focus-visible — только при навигации с клавиатуры,
+   чтобы мышь не показывала ring при клике. */
+.tab:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+  border-radius: 6px 6px 0 0;
+}
+
+.tab:disabled {
+  color: #d1d5db;
+  cursor: not-allowed;
+}
+
+/* Индикатор активной вкладки — тонкая линия снизу.
+   ::after вместо border-bottom, чтобы не сдвигать контент. */
+.tabActive {
+  color: #3b82f6;
+}
+
+.tabActive::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  background-color: #3b82f6;
+}
+
+/* fadeIn анимация при переключении панелей.
+   opacity + transform дают мягкий эффект появления. */
+.panel {
+  animation: fadeIn 0.25s ease-out;
+  /* tabIndex={0} делает панель фокусируемой — требование WAI-ARIA
+     для панелей, чтобы можно было навигировать внутри клавиатурой. */
+  outline: none;
+}
+
+.panel:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
