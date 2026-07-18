@@ -1,0 +1,145 @@
+.container {
+  width: 100%;
+}
+
+.title {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1.25rem;
+  color: inherit;
+  text-align: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  /* ВАЖНО: карточки не растягиваются по высоте самой высокой в ряду */
+  align-items: start; 
+}
+
+.card {
+  margin: 0;
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+  background: #f3f4f6;
+}
+
+.content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-grow: 1;
+}
+
+.productTitle {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #111827;
+  line-height: 1.4;
+}
+
+.price {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #3b82f6;
+}
+
+.description {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #6b7280;
+  /* Текст теперь не обрезается, высота авто */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.skeleton {
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #f3f4f6 0%, #e5e7eb 50%, #f3f4f6 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  padding: 32px 0;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #e5e7eb;
+  border-top-color: #3b82f6;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.error {
+  text-align: center;
+  padding: 32px;
+  color: #ef4444;
+}
+
+.retryButton {
+  margin-top: 12px;
+  padding: 10px 20px;
+  background: #ef4444;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.retryButton:hover {
+  background: #dc2626;
+}
+
+.sentinel {
+  height: 1px;
+  width: 100%;
+}
+
+.endMessage {
+  text-align: center;
+  padding: 32px 0;
+  color: #9ca3af;
+  font-size: 14px;
+  font-weight: 500;
+}
